@@ -1,6 +1,8 @@
 import os
 import wave
 
+from OutputTranscriber import OutputTranscriber
+import pyautogui as pag
 import numpy as np
 import pyaudio
 import threading
@@ -119,6 +121,11 @@ class Client:
         # Truncate to last 3 entries for brevity.
         text = text[-3:]
         utils.clear_screen()
+        #HERE IS WHERE IT IS PRINTING TRANSCRIPT - MODIFIED:
+        output = OutputTranscriber()
+        pag.sleep(2)
+        for word in text.split(' '): 
+          output(word)
         utils.print_transcript(text)
 
     def on_message(self, ws, message):
